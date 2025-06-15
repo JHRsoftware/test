@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Name and Address Form</title>
+</head>
+<body>
+    <form id="myForm" onsubmit="submitForm(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br><br>
+        <label for="address">Address:</label>
+        <input type="text" id="address" required><br><br>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        function submitForm(event) {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const address = document.getElementById('address').value;
+
+            // Google Apps Script URL
+            const url = 'https://script.google.com/macros/s/AKfycbzH5MCkUY2BvJ5LTskpArSfAfGQg9YYwn3Kpdagh07F9l0uVBVFyUVXBHbtPtbgqw/exec';
+
+            fetch(url, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ name, address })
+            })
+            .then(() => {
+                alert('Data submitted successfully!');
+                document.getElementById('myForm').reset();
+            })
+            .catch(error => console.error('Error:', error));
+        }
+    </script>
+</body>
+</html>
