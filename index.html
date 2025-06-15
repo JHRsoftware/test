@@ -1,40 +1,101 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Name and Address Form</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Name and Address Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+    }
+
+    .container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 15px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
     <form id="myForm" onsubmit="submitForm(event)">
-        <label for="name">Name:</label>
-        <input type="text" id="name" required><br><br>
-        <label for="address">Address:</label>
-        <input type="text" id="address" required><br><br>
-        <button type="submit">Submit</button>
+      <label for="name">Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="address">Address:</label>
+      <input type="text" id="address" required>
+
+      <button type="submit">Submit</button>
     </form>
+  </div>
 
-    <script>
-        function submitForm(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const address = document.getElementById('address').value;
+  <script>
+    function submitForm(event) {
+      event.preventDefault();
+      const name = document.getElementById('name').value;
+      const address = document.getElementById('address').value;
 
-            // Google Apps Script URL
-            const url = 'https://script.google.com/macros/s/AKfycbzH5MCkUY2BvJ5LTskpArSfAfGQg9YYwn3Kpdagh07F9l0uVBVFyUVXBHbtPtbgqw/exec';
+      const url = 'https://script.google.com/macros/s/AKfycbzH5MCkUY2BvJ5LTskpArSfAfGQg9YYwn3Kpdagh07F9l0uVBVFyUVXBHbtPtbgqw/exec';
 
-            fetch(url, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ name, address })
-            })
-            .then(() => {
-                alert('Data submitted successfully!');
-                document.getElementById('myForm').reset();
-            })
-            .catch(error => console.error('Error:', error));
-        }
-    </script>
+      fetch(url, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ name, address })
+      })
+      .then(() => {
+        alert('Data submitted successfully!');
+        document.getElementById('myForm').reset();
+      })
+      .catch(error => console.error('Error:', error));
+    }
+  </script>
 </body>
 </html>
